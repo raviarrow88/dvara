@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="list-group">
+  {% for ord in orders %}
+  <a href="#" class="list-group-item list-group-item-action">{{ord.category}}-{{ord.sub_category}}</a>
+  {% endfor %}
+</div>
+
+
+{% endblock content %}

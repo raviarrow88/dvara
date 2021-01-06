@@ -1,0 +1,23 @@
+{% extends "base.html"  %}
+
+{% load static %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+{% block headextra %}
+
+<script type="text/javascript" src="{% static 'js/dropdown.js' %}">  </script>
+
+{% endblock headextra %}
+
+
+<h2>Category Form</h2>
+
+<form class="" action="" method="post">    {% csrf_token %}
+
+  {{form | as_bootstrap }}
+  <button type="submit" name="button" class="btn btn-primary">Create</button>
+</form>
+
+{% endblock content %}

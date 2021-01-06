@@ -1,7 +1,7 @@
 import pandas as pd
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Category, SubCategory
+from django.http import HttpResponse,JsonResponse
+from .models import Category, SubCategory,Order
 from django.urls import reverse
 import json
 from django.shortcuts import redirect
@@ -50,3 +50,48 @@ def upload_data(request):
     except Exception as e:
         messages.error(request, str(e))
         return redirect(reverse('upload_data'))
+
+
+
+
+
+
+from django.views.generic import CreateView,FormView
+from .forms import OrderForm
+from django.urls import reverse_lazy
+
+# Form class function to createOrder
+class CreateItem(CreateView):
+    model = Order
+    form_class = OrderForm
+    success_url = reverse_lazy('order_list')
+    template_name = 'form.html'
+
+
+
+# Api to filter the subcategories using category_id
+def getSubCategory(request):
+    id = request.GET['id']
+
+    catgry = Category.objects.get(id=id)
+
+    sub_catgs = catgry.subcategory_set.all()
+
+    sub_catgs_list = []
+
+    for s in sub_catgs:
+        sub_catgs_list.append((str(s.id),s.name))
+
+    data = {
+    'sub_cats':sub_catgs_list
+    }
+
+    return JsonResponse(data)
+
+
+
+def orderslist(request):
+    orders = Order.objects.all()
+    context = {'orders':orders}
+
+    return render(request,'list.html',context)
