@@ -56,7 +56,7 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,10 +122,12 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_pro","static") #production
+STATIC_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_pro", "static")  # production
 
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static_dev","assets"), #development environment  while pushing to git run collectstatic
-#    '/var/www/static/',
-    )
+    # development environment  while pushing to git run collectstatic
+    os.path.join(BASE_DIR, "static_dev", "assets"),
+    #    '/var/www/static/',
+)

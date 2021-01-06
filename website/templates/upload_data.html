@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action=" " method="post" enctype="multipart/form-data">{% csrf_token %}
+<table>
+  <tr>
+    <td colspan="2">
+      Upload Data
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="file" name="file" />
+    </td>
+    <td>
+      <input type="submit" class='btn btn-primary'  value="Upload" />
+    </td>
+
+  </tr>
+</table>
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</form>
+{% endblock %}
